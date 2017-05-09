@@ -15,7 +15,6 @@ public class Game {
     private Map map;
     private int[][] field;
     private Main display;
-//    private ArrayList<Component> renderList;
 
     private Game(Main display) {
         this.player = Man.getInstance();

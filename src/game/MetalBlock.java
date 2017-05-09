@@ -18,8 +18,7 @@ public class MetalBlock extends Block {
     @Override
     public void render() {
         super.render();
-        display.fill(120,100,240);
-        display.rect(this.x,this.y,BLOCK_WIDTH,BLOCK_HIGHT);
+        display.image(display.MetalBlock, this.x, this.y);
     }
 
 }

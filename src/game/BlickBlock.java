@@ -20,7 +20,6 @@ public class BlickBlock extends Block {
     @Override
     public void render() {
         super.render();
-        display.fill(120,50,240);
-        display.rect(this.x,this.y,BLOCK_WIDTH,BLOCK_HIGHT);
+        display.image(display.BlickBlock, this.x, this.y);
     }
 }
