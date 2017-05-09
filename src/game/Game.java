@@ -9,19 +9,6 @@ public class Game {
     private Bomb burn;
     private Map map;
     private int[][] field;
-    private final int[][] DEFAULT_FIELD =  {{8,8,8,8,8,8,8,8,8,8,8,8,8,8,8},
-                                            {8,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-                                            {8,0,8,0,8,0,8,0,8,0,8,0,8,0,8},
-                                            {8,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-                                            {8,0,8,0,8,0,8,0,8,0,8,0,8,0,8},
-                                            {8,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-                                            {8,0,8,0,8,0,8,0,8,0,8,0,8,0,8},
-                                            {8,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-                                            {8,0,8,0,8,0,8,0,8,0,8,0,8,0,8},
-                                            {8,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-                                            {8,0,8,0,8,0,8,0,8,0,8,0,8,0,8},
-                                            {8,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
-                                            {8,8,8,8,8,8,8,8,8,8,8,8,8,8,8}};
 
     private Game() {
         this.player = Man.getInstance();
@@ -29,7 +16,7 @@ public class Game {
         this.bot.add(new Villain(11,14));
         this.bot.add(new Villain(12,13));
         this.burn = new Bomb(0,0);
-        this.map = new Map(DEFAULT_FIELD);
+        this.map = new Map();
     }
 
     public static Game getInstance() {
@@ -46,5 +33,9 @@ public class Game {
     public void setField(int[][] field) {
         this.field = field;
         this.map.setMaze(field);
+    }
+
+    public void repaint() {
+
     }
 }
