@@ -1,4 +1,7 @@
-package game;
+import game.Bomb;
+import game.Man;
+import game.Map;
+import game.Villain;
 
 import java.util.ArrayList;
 
@@ -9,6 +12,8 @@ public class Game {
     private Bomb burn;
     private Map map;
     private int[][] field;
+    private Main window;
+//    private ArrayList<Component> renderList;
 
     private Game() {
         this.player = Man.getInstance();
@@ -17,6 +22,7 @@ public class Game {
         this.bot.add(new Villain(12,13));
         this.burn = new Bomb(0,0);
         this.map = new Map();
+
     }
 
     public static Game getInstance() {

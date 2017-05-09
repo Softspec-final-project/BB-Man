@@ -65,7 +65,7 @@ public class Map implements Component, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        //TODO destroy
+        //TODO destroy box
     }
 
     @Override

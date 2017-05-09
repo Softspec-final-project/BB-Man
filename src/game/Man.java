@@ -40,6 +40,12 @@ public class Man implements Sprite, Observer {
         this.y = y;
     }
 
+    public void kill() {
+        this.isAlive = false;
+        setX(1);
+        setY(1);
+    }
+
     @Override
     public void move() {
 

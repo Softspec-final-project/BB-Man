@@ -1,12 +1,13 @@
 import processing.core.PApplet;
 
 public class Main extends PApplet {
+//    public Game g = Game.getInstance();
     public static void main(String[] args) {
         PApplet.main("Main");
     }
 
     public void settings() {
-        size(300,300);
+        size(960,832);
     }
 
     public void setup() {
@@ -15,5 +16,6 @@ public class Main extends PApplet {
 
     public void draw() {
         rect(width/2,height/2,second(),second());
+//        g.repaint();
     }
 }
