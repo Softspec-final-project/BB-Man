@@ -1,3 +1,5 @@
+package runHere;
+
 import game.Bomb;
 import game.Man;
 import game.Map;
@@ -12,22 +14,23 @@ public class Game {
     private Bomb burn;
     private Map map;
     private int[][] field;
-    private Main window;
+    private Main display;
 //    private ArrayList<Component> renderList;
 
-    private Game() {
+    private Game(Main display) {
         this.player = Man.getInstance();
+        bot = new ArrayList<>();
         this.bot.add(new Villain(12,14));
         this.bot.add(new Villain(11,14));
         this.bot.add(new Villain(12,13));
         this.burn = new Bomb(0,0);
-        this.map = new Map();
-
+        this.map = new Map(display);
+        this.display = display;
     }
 
-    public static Game getInstance() {
+    public static Game getInstance(Main display) {
         if(instance == null) {
-            instance = new Game();
+            instance = new Game(display);
         }
         return instance;
     }
@@ -42,6 +45,6 @@ public class Game {
     }
 
     public void repaint() {
-
+        map.render();
     }
 }
