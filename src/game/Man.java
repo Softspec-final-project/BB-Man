@@ -1,6 +1,7 @@
 package game;
 
 import model.Sprite;
+import runHere.Main;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -8,18 +9,25 @@ import java.util.Observer;
 public class Man implements Sprite, Observer {
     private int x;
     private int y;
+    private Main display;
+    ///////////////////////////////////////////////
+    //  1 = front, 2 = back, 3 = left, 4 = right //
+    ///////////////////////////////////////////////
+    private int direction;
     private boolean isAlive;
     private static Man instance;
 
-    private Man() {
-        this.x = 1;
-        this.y = 1;
-        isAlive = true;
+    private Man(Main display) {
+        this.x = 64;
+        this.y = 64;
+        this.direction = 1;
+        this.isAlive = true;
+        this.display = display;
     }
 
-    public static Man getInstance() {
+    public static Man getInstance(Main display) {
         if(instance == null) {
-            instance = new Man();
+            instance = new Man(display);
         }
         return instance;
     }
@@ -63,6 +71,14 @@ public class Man implements Sprite, Observer {
 
     @Override
     public void render() {
-
+        if(this.direction == 1) {
+            display.image(display.ManF, this.x, this.y);
+        } else if(this.direction == 2) {
+            display.image(display.ManB, this.x, this.y);
+        } else if(this.direction == 3) {
+            display.image(display.ManL, this.x, this.y);
+        } else if(this.direction == 4) {
+            display.image(display.ManR, this.x, this.y);
+        }
     }
 }

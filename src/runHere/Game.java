@@ -17,7 +17,7 @@ public class Game {
     private Main display;
 
     private Game(Main display) {
-        this.player = Man.getInstance();
+        this.player = Man.getInstance(display);
         bot = new ArrayList<>();
         this.bot.add(new Villain(12,14));
         this.bot.add(new Villain(11,14));
@@ -45,5 +45,6 @@ public class Game {
 
     public void repaint() {
         map.render();
+        player.render();
     }
 }
