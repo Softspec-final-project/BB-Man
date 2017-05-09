@@ -56,7 +56,7 @@ public class Man implements Sprite, Observer {
 
     @Override
     public void move() {
-
+        //TODO: move player
     }
 
     @Override
@@ -66,7 +66,7 @@ public class Man implements Sprite, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        //TODO: kill player if in the dead area
+        //TODO: kill player if in the dead area or hit villain
     }
 
     @Override

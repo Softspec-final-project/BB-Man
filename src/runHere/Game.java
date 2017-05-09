@@ -9,20 +9,20 @@ import java.util.ArrayList;
 
 public class Game {
     public static Game instance;
-    private Man player;
-    private ArrayList<Villain> bot;
-    private Bomb burn;
     private Map map;
-    private int[][] field;
+    private Bomb burn;
+    private Man player;
     private Main display;
+    private int[][] field;
+    private ArrayList<Villain> bot;
 
     private Game(Main display) {
         this.player = Man.getInstance(display);
         bot = new ArrayList<>();
-        this.bot.add(new Villain(12,14));
-        this.bot.add(new Villain(11,14));
-        this.bot.add(new Villain(12,13));
-        this.burn = new Bomb(0,0);
+        this.bot.add(new Villain(13*64,11*64, display));
+        this.bot.add(new Villain(13*64,10*64, display));
+        this.bot.add(new Villain(12*64,11*64, display));
+        this.burn = new Bomb(0,0, display);
         this.map = new Map(display);
         this.display = display;
     }
@@ -44,7 +44,12 @@ public class Game {
     }
 
     public void repaint() {
-        map.render();
-        player.render();
+        //TODO: call render to show on the window
+        this.map.render();
+        this.player.render();
+        for(Villain a : this.bot) {
+            a.render();
+        }
+        this.burn.render();
     }
 }
