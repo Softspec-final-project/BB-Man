@@ -4,7 +4,12 @@ import game.Bomb;
 import game.Man;
 import game.Map;
 import game.Villain;
+import model.Operation;
+import operation.*;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class Game {
@@ -15,9 +20,12 @@ public class Game {
     private Main display;
     private int[][] field;
     private ArrayList<Villain> bot;
+    private ArrayList<Operation> replay;
+    private Operation[] move = {new PlantBomb(), new MoveDown(), new MoveUp(), new MoveLeft(), new MoveRight()};
 
     private Game(Main display) {
-        this.player = Man.getInstance(display);
+        this.player = Man.getInstance();
+        player.addDisplay(display);
         bot = new ArrayList<>();
         this.bot.add(new Villain(13*64,11*64, display));
         this.bot.add(new Villain(13*64,10*64, display));
@@ -25,6 +33,7 @@ public class Game {
         this.burn = new Bomb(0,0, display);
         this.map = new Map(display);
         this.display = display;
+        replay = new ArrayList<>();
     }
 
     public static Game getInstance(Main display) {
@@ -47,9 +56,14 @@ public class Game {
         //TODO: call render to show on the window
         this.map.render();
         this.player.render();
-        for(Villain a : this.bot) {
+        for (Villain a : this.bot) {
             a.render();
         }
 //        this.burn.burnBabyBurn();
+    }
+
+    public void addOperation(int o) {
+        move[o].execute();
+        replay.add(move[o]);
     }
 }

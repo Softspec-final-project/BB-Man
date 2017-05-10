@@ -1,9 +1,14 @@
 package runHere;
 
 import game.BlickBlock;
+import model.Operation;
+import operation.MoveDown;
+import operation.MoveUp;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.event.KeyEvent;
 import runHere.Game;
+
 
 public class Main extends PApplet {
     public Game g = Game.getInstance(this);
@@ -46,5 +51,20 @@ public class Main extends PApplet {
     public void draw() {
         image(Floor, 0, 0);
         g.repaint();
+    }
+
+    @Override
+    public void keyPressed(KeyEvent event) {
+        if (event.getKeyCode() == UP) {
+            g.addOperation(1);
+        } else if (event.getKeyCode() == DOWN) {
+            g.addOperation(2);
+        } else if (event.getKeyCode() == LEFT) {
+            g.addOperation(3);
+        } else if (event.getKeyCode() == RIGHT) {
+            g.addOperation(4);
+        } else if (event.getKeyCode() == 32) {
+            g.addOperation(0);
+        }
     }
 }

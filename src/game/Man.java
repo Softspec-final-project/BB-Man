@@ -17,19 +17,22 @@ public class Man implements Sprite, Observer {
     private boolean isAlive;
     private static Man instance;
 
-    private Man(Main display) {
+    private Man() {
         this.x = 64;
         this.y = 64;
         this.direction = 1;
         this.isAlive = true;
-        this.display = display;
     }
 
-    public static Man getInstance(Main display) {
+    public static Man getInstance() {
         if(instance == null) {
-            instance = new Man(display);
+            instance = new Man();
         }
         return instance;
+    }
+
+    public void addDisplay (Main display) {
+        this.display = display;
     }
 
     public int getX() {
@@ -55,9 +58,12 @@ public class Man implements Sprite, Observer {
     }
 
     @Override
-    public void move() {
+    public void move(int m, int x, int y) {
         //TODO: move player
-
+        this.direction = m;
+        this.x += x;
+        this.y += y;
+        render();
     }
 
     @Override
@@ -68,18 +74,21 @@ public class Man implements Sprite, Observer {
     @Override
     public void update(Observable o, Object arg) {
         //TODO: kill player if in the dead area or hit villain
+
     }
 
     @Override
     public void render() {
         if(this.direction == 1) {
-            display.image(display.ManF, this.x, this.y);
+            display.image(display.ManF, this.x, this.y - 1);
         } else if(this.direction == 2) {
-            display.image(display.ManB, this.x, this.y);
+            display.image(display.ManB, this.x, this.y + 1);
         } else if(this.direction == 3) {
-            display.image(display.ManL, this.x, this.y);
+            display.image(display.ManL, this.x - 1, this.y);
         } else if(this.direction == 4) {
-            display.image(display.ManR, this.x, this.y);
+            display.image(display.ManR, this.x + 1, this.y);
+        } else {
+
         }
     }
 }
