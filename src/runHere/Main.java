@@ -19,6 +19,7 @@ public class Main extends PApplet {
     public PImage VillainL;
     public PImage BlickBlock;
     public PImage MetalBlock;
+    private boolean canMove = true;
     public static void main(String[] args) {
         PApplet.main("runHere.Main");
     }
@@ -50,16 +51,24 @@ public class Main extends PApplet {
 
     @Override
     public void keyPressed(KeyEvent event) {
-        if (event.getKeyCode() == UP) {
-            g.addOperation(g.getPlayer(), 1);
-        } else if (event.getKeyCode() == DOWN) {
-            g.addOperation(g.getPlayer(), 2);
-        } else if (event.getKeyCode() == LEFT) {
-            g.addOperation(g.getPlayer(), 3);
-        } else if (event.getKeyCode() == RIGHT) {
-            g.addOperation(g.getPlayer(), 4);
-        } else if (event.getKeyCode() == 32) {
-            g.addOperation(g.getPlayer(), 0);
+        if (canMove) {
+            canMove = false;
+            if (event.getKeyCode() == UP) {
+                g.addOperation(g.getPlayer(), 1);
+            } else if (event.getKeyCode() == DOWN) {
+                g.addOperation(g.getPlayer(), 2);
+            } else if (event.getKeyCode() == LEFT) {
+                g.addOperation(g.getPlayer(), 3);
+            } else if (event.getKeyCode() == RIGHT) {
+                g.addOperation(g.getPlayer(), 4);
+            } else if (event.getKeyCode() == 32) {
+                g.addOperation(g.getPlayer(), 0);
+            }
         }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent event) {
+        canMove = true;
     }
 }
