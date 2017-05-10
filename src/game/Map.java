@@ -81,4 +81,8 @@ public class Map implements Component, Observer {
             }
         }
     }
+
+    public Block[][] getBlockList() {
+        return blockList;
+    }
 }

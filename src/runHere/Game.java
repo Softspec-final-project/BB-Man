@@ -63,7 +63,8 @@ public class Game {
     }
 
     public void addOperation(int o) {
-        if () {
+        int[] step = move[o].getStep();
+        if (map.getBlockList()[(player.getY() + 64*step[1]) / 64][(player.getX() + 64*step[0]) / 64] == null) {
             move[o].execute();
             replay.add(move[o]);
         }
