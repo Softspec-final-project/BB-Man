@@ -55,8 +55,8 @@ public class Game {
         this.map.render();
         this.player.render();
         for (Villain a : this.bot) {
-//            int o = (int)(Math.random() * 5);
-//            addVillainOperation(a, o);
+            int o = (int)(Math.random() * 5);
+            addVillainOperation(a, o);
             a.render();
         }
 //        this.burn.burnBabyBurn();
@@ -70,10 +70,11 @@ public class Game {
         }
     }
 
-    public void addVillainOperation(Villain b, int o) {
+    public void addVillainOperation(Villain a, int o) {
         int[] step = move[o].getStep();
-        if (map.getBlockList()[(b.getY() + 64*step[1]) / 64][(b.getX() + 64*step[0]) / 64] == null) {
-            move[o].execute(b);
+        if (map.getBlockList()[(a.getY() + 64*step[1]) / 64][(a.getX() + 64*step[0]) / 64] == null) {
+            move[o].execute(a);
+            a.addReplay(move[o]);
         }
     }
 }
