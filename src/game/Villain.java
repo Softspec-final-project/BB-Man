@@ -29,6 +29,11 @@ public class Villain implements Sprite, Observer {
         return x;
     }
 
+    @Override
+    public void boomBoom() {
+
+    }
+
     public void setX(int x) {
         this.x = x;
     }
@@ -77,8 +82,6 @@ public class Villain implements Sprite, Observer {
             display.image(display.VillainL, this.x, this.y);
         } else if(this.direction == 4) {
             display.image(display.VillainR, this.x, this.y);
-        } else {
-            // Plant Bomb
         }
     }
 }

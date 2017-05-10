@@ -3,7 +3,7 @@ package game;
 import model.Block;
 import runHere.Main;
 
-public class MetalBlock extends Block {
+public class MetalBlock implements Block {
     private int x;
     private int y;
     private Main display;
@@ -17,7 +17,6 @@ public class MetalBlock extends Block {
 
     @Override
     public void render() {
-        super.render();
         display.image(display.MetalBlock, this.x, this.y);
     }
 

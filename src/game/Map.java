@@ -50,8 +50,9 @@ public class Map implements Component, Observer {
                     case 1:
                         blockList[i][j] = new BrickBlock(j*64, i*64, this.display);
                         break;
-                    default:
+                    case 8:
                         blockList[i][j] = new MetalBlock(j*64 ,i*64, this.display);
+                        break;
                 }
             }
         }
@@ -85,4 +86,5 @@ public class Map implements Component, Observer {
     public Block[][] getBlockList() {
         return blockList;
     }
+
 }

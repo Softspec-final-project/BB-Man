@@ -5,7 +5,7 @@ import runHere.Main;
 
 import static processing.core.PApplet.second;
 
-public class BrickBlock extends Block {
+public class BrickBlock implements Block {
     private int x;
     private int y;
     private Main display;
@@ -19,7 +19,6 @@ public class BrickBlock extends Block {
 
     @Override
     public void render() {
-        super.render();
         display.image(display.BlickBlock, this.x, this.y);
     }
 }

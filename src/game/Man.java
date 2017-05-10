@@ -21,18 +21,17 @@ public class Man implements Sprite, Observer {
     private boolean isAlive;
     private static Man instance;
 
-    private Man(Bomb b) {
+    private Man() {
         this.x = 64;
         this.y = 64;
-        this.bomb = b;
         this.direction = 1;
         this.isAlive = true;
         this.replay = new ArrayList<>();
     }
 
-    public static Man getInstance(Bomb b) {
+    public static Man getInstance() {
         if(instance == null) {
-            instance = new Man(b);
+            instance = new Man();
         }
         return instance;
     }
@@ -63,6 +62,7 @@ public class Man implements Sprite, Observer {
         setY(1);
     }
 
+    @Override
     public void boomBoom() {
         bomb.burnBabyBurn(this.x, this.y);
     }
@@ -94,6 +94,7 @@ public class Man implements Sprite, Observer {
 
     @Override
     public void render() {
+        bomb.render();
         if(this.direction == 1) {
             display.image(display.ManF, this.x, this.y);
         } else if(this.direction == 2) {
@@ -102,8 +103,11 @@ public class Man implements Sprite, Observer {
             display.image(display.ManL, this.x, this.y);
         } else if(this.direction == 4) {
             display.image(display.ManR, this.x, this.y);
-        } else {
-            // Plant Bomb
         }
+
+    }
+
+    public void addBomb(Bomb bomb) {
+        this.bomb = bomb;
     }
 }

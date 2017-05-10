@@ -7,6 +7,6 @@ public class PlantBomb extends Operation {
 
     @Override
     public void execute(Sprite s) {
-
+        s.boomBoom();
     }
 }

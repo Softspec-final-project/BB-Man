@@ -26,15 +26,16 @@ public class Game {
     private Operation[] move = {new PlantBomb(), new MoveDown(), new MoveUp(), new MoveLeft(), new MoveRight()};
 
     private Game(Main display) {
-        this.player = Man.getInstance(this.bomb);
+        this.player = Man.getInstance();
         player.addDisplay(display);
         bot = new ArrayList<>();
         this.bot.add(new Villain(13*64,11*64, display));
         this.bot.add(new Villain(13*64,10*64, display));
         this.bot.add(new Villain(12*64,11*64, display));
-        this.bomb = new Bomb(-1,-1, display);
+        this.bomb = new Bomb(-64, -64, display, this);
         this.map = new Map(display);
         this.display = display;
+        this.player.addBomb(this.bomb);
     }
 
     public static Game getInstance(Main display) {
@@ -69,10 +70,13 @@ public class Game {
     public void addOperation(Sprite s, int o) {
         int[] step = move[o].getStep();
         try {
-            if (map.getBlockList()[(s.getY() + 64 * step[1]) / 64][(s.getX() + 64 * step[0]) / 64] == null) {
+            if (o == 0) {
+                move[0].execute(s);
+            } else if (map.getBlockList()[(s.getY() + 64 * step[1]) / 64][(s.getX() + 64 * step[0]) / 64] == null && (((s.getY() + 64 * step[1]) != bomb.getY()) && ((s.getX() + 64 * step[0]) != bomb.getX()))) {
                 move[o].execute(s);
                 s.addReplay(move[o]);
             }
+
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(e);
         }
@@ -81,4 +85,6 @@ public class Game {
     public Man getPlayer() {
         return player;
     }
+
+    public Map getMap() { return map; }
 }

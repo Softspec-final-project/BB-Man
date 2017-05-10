@@ -6,5 +6,5 @@ public interface Sprite extends Component {
     public void addReplay(Operation o);
     public int getY();
     public int getX();
-
+    public void boomBoom();
 }
