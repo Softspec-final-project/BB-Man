@@ -40,6 +40,7 @@ public class Villain implements Sprite, Observer {
     @Override
     public void move(int m, int x, int y) {
         //TODO: move randomly
+
     }
 
     @Override

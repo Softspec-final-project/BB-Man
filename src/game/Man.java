@@ -80,13 +80,13 @@ public class Man implements Sprite, Observer {
     @Override
     public void render() {
         if(this.direction == 1) {
-            display.image(display.ManF, this.x, this.y - 1);
+            display.image(display.ManF, this.x, this.y);
         } else if(this.direction == 2) {
-            display.image(display.ManB, this.x, this.y + 1);
+            display.image(display.ManB, this.x, this.y);
         } else if(this.direction == 3) {
-            display.image(display.ManL, this.x - 1, this.y);
+            display.image(display.ManL, this.x, this.y);
         } else if(this.direction == 4) {
-            display.image(display.ManR, this.x + 1, this.y);
+            display.image(display.ManR, this.x, this.y);
         } else {
 
         }

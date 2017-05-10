@@ -63,7 +63,9 @@ public class Game {
     }
 
     public void addOperation(int o) {
-        move[o].execute();
-        replay.add(move[o]);
+        if () {
+            move[o].execute();
+            replay.add(move[o]);
+        }
     }
 }
