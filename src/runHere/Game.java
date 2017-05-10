@@ -17,7 +17,7 @@ import java.util.Random;
 public class Game {
     public static Game instance;
     private Map map;
-    private Bomb burn;
+    private Bomb bomb;
     private Man player;
     private Main display;
     private int[][] field;
@@ -26,13 +26,13 @@ public class Game {
     private Operation[] move = {new PlantBomb(), new MoveDown(), new MoveUp(), new MoveLeft(), new MoveRight()};
 
     private Game(Main display) {
-        this.player = Man.getInstance();
+        this.player = Man.getInstance(this.bomb);
         player.addDisplay(display);
         bot = new ArrayList<>();
         this.bot.add(new Villain(13*64,11*64, display));
         this.bot.add(new Villain(13*64,10*64, display));
         this.bot.add(new Villain(12*64,11*64, display));
-        this.burn = new Bomb(0,0, display);
+        this.bomb = new Bomb(-1,-1, display);
         this.map = new Map(display);
         this.display = display;
     }
@@ -64,7 +64,6 @@ public class Game {
             }
             a.render();
         }
-//        this.burn.burnBabyBurn();
     }
 
     public void addOperation(Sprite s, int o) {

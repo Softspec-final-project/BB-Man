@@ -11,6 +11,7 @@ import java.util.Observer;
 public class Man implements Sprite, Observer {
     private int x;
     private int y;
+    private Bomb bomb;
     private Main display;
     private ArrayList<Operation> replay;
     ///////////////////////////////////////////////
@@ -20,17 +21,18 @@ public class Man implements Sprite, Observer {
     private boolean isAlive;
     private static Man instance;
 
-    private Man() {
+    private Man(Bomb b) {
         this.x = 64;
         this.y = 64;
+        this.bomb = b;
         this.direction = 1;
         this.isAlive = true;
         this.replay = new ArrayList<>();
     }
 
-    public static Man getInstance() {
+    public static Man getInstance(Bomb b) {
         if(instance == null) {
-            instance = new Man();
+            instance = new Man(b);
         }
         return instance;
     }
@@ -59,6 +61,10 @@ public class Man implements Sprite, Observer {
         this.isAlive = false;
         setX(1);
         setY(1);
+    }
+
+    public void boomBoom() {
+        bomb.burnBabyBurn(this.x, this.y);
     }
 
     @Override

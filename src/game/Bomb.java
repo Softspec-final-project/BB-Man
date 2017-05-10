@@ -17,7 +17,9 @@ public class Bomb extends Observable implements Component {
         this.display = display;
     }
 
-    public void burnBabyBurn(){
+    public void burnBabyBurn(int x, int y){
+        this.x = x;
+        this.y = y;
         render();
         setChanged();
 //        notifyObservers(String.format("",));
@@ -27,7 +29,7 @@ public class Bomb extends Observable implements Component {
     public void render() {
 //        int start = display.second();
 //        if(Math.abs(display.second() - start) != 3) {
-//            display.image(display.Bomb, this.x, this.y);
+            display.image(display.Bomb, this.x, this.y);
 //        }
 //        display.redraw();
     }
