@@ -48,7 +48,7 @@ public class Map implements Component, Observer {
                         blockList[i][j] = null;
                         break;
                     case 1:
-                        blockList[i][j] = new BlickBlock(j*64, i*64, this.display);
+                        blockList[i][j] = new BrickBlock(j*64, i*64, this.display);
                         break;
                     default:
                         blockList[i][j] = new MetalBlock(j*64 ,i*64, this.display);

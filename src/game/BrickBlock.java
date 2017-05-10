@@ -5,12 +5,12 @@ import runHere.Main;
 
 import static processing.core.PApplet.second;
 
-public class BlickBlock extends Block {
+public class BrickBlock extends Block {
     private int x;
     private int y;
     private Main display;
 
-    public BlickBlock(int x, int y, Main display) {
+    public BrickBlock(int x, int y, Main display) {
         super();
         this.x = x;
         this.y = y;

@@ -12,6 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game {
     public static Game instance;
@@ -21,6 +22,7 @@ public class Game {
     private Main display;
     private int[][] field;
     private ArrayList<Villain> bot;
+    private Random random = new Random(System.currentTimeMillis());
     private Operation[] move = {new PlantBomb(), new MoveDown(), new MoveUp(), new MoveLeft(), new MoveRight()};
 
     private Game(Main display) {
@@ -56,8 +58,10 @@ public class Game {
         this.map.render();
         this.player.render();
         for (Villain a : this.bot) {
-            int o = (int)(Math.random() * 5);
-            addOperation(a, o);
+            if (display.frameCount % 15 == 0) {
+                int o = random.nextInt(5);
+                addOperation(a, o);
+            }
             a.render();
         }
 //        this.burn.burnBabyBurn();

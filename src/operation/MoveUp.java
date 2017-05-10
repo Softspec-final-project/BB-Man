@@ -6,7 +6,7 @@ import model.Sprite;
 public class MoveUp extends Operation {
     private int[] step = {0, 1};
 
-
+    @Override
     public int[] getStep() {
         return step;
     }

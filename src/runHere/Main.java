@@ -1,13 +1,8 @@
 package runHere;
 
-import game.BlickBlock;
-import model.Operation;
-import operation.MoveDown;
-import operation.MoveUp;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.event.KeyEvent;
-import runHere.Game;
 
 
 public class Main extends PApplet {
