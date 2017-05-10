@@ -2,12 +2,7 @@ package operation;
 
 import model.Operation;
 
-public class PlantBomb implements Operation {
-
-    @Override
-    public int[] getStep() {
-        return new int[0];
-    }
+public class PlantBomb extends Operation {
 
     @Override
     public void execute() {

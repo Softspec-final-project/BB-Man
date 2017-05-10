@@ -3,9 +3,9 @@ package model;
 
 import game.Man;
 
-public interface Operation {
-    int v = 64;
-    public Man man = Man.getInstance();
-    public int[] getStep();
-    public void execute();
+public abstract class Operation {
+    protected int v = 64;
+    protected Man man = Man.getInstance();
+    public int[] getStep(){return new int[0];}
+    public void execute(){}
 }

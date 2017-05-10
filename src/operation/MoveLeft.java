@@ -2,7 +2,7 @@ package operation;
 
 import model.Operation;
 
-public class MoveLeft implements Operation {
+public class MoveLeft extends Operation {
     private int[] step = {-1, 0};
 
     @Override
