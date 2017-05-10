@@ -1,8 +1,10 @@
 package game;
 
+import model.Operation;
 import model.Sprite;
 import runHere.Main;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -10,6 +12,7 @@ public class Man implements Sprite, Observer {
     private int x;
     private int y;
     private Main display;
+    private ArrayList<Operation> replay;
     ///////////////////////////////////////////////
     //  1 = front, 2 = back, 3 = left, 4 = right //
     ///////////////////////////////////////////////
@@ -22,6 +25,7 @@ public class Man implements Sprite, Observer {
         this.y = 64;
         this.direction = 1;
         this.isAlive = true;
+        this.replay = new ArrayList<>();
     }
 
     public static Man getInstance() {
@@ -69,6 +73,11 @@ public class Man implements Sprite, Observer {
     @Override
     public boolean isAlive() {
         return this.isAlive;
+    }
+
+    @Override
+    public void addReplay(Operation o) {
+        replay.add(o);
     }
 
     @Override

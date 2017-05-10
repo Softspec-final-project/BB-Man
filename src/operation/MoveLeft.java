@@ -1,6 +1,7 @@
 package operation;
 
 import model.Operation;
+import model.Sprite;
 
 public class MoveLeft extends Operation {
     private int[] step = {-1, 0};
@@ -11,7 +12,7 @@ public class MoveLeft extends Operation {
     }
 
     @Override
-    public void execute() {
-        man.move(3, -v, 0);
+    public void execute(Sprite s) {
+        s.move(3, -v, 0);
     }
 }

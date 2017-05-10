@@ -20,7 +20,6 @@ public class Game {
     private Main display;
     private int[][] field;
     private ArrayList<Villain> bot;
-    private ArrayList<Operation> replay;
     private Operation[] move = {new PlantBomb(), new MoveDown(), new MoveUp(), new MoveLeft(), new MoveRight()};
 
     private Game(Main display) {
@@ -33,7 +32,6 @@ public class Game {
         this.burn = new Bomb(0,0, display);
         this.map = new Map(display);
         this.display = display;
-        replay = new ArrayList<>();
     }
 
     public static Game getInstance(Main display) {
@@ -57,16 +55,25 @@ public class Game {
         this.map.render();
         this.player.render();
         for (Villain a : this.bot) {
+//            int o = (int)(Math.random() * 5);
+//            addVillainOperation(a, o);
             a.render();
         }
 //        this.burn.burnBabyBurn();
     }
 
-    public void addOperation(int o) {
+    public void addPlayerOperation(int o) {
         int[] step = move[o].getStep();
         if (map.getBlockList()[(player.getY() + 64*step[1]) / 64][(player.getX() + 64*step[0]) / 64] == null) {
-            move[o].execute();
-            replay.add(move[o]);
+            move[o].execute(player);
+            player.addReplay(move[o]);
+        }
+    }
+
+    public void addVillainOperation(Villain b, int o) {
+        int[] step = move[o].getStep();
+        if (map.getBlockList()[(b.getY() + 64*step[1]) / 64][(b.getX() + 64*step[0]) / 64] == null) {
+            move[o].execute(b);
         }
     }
 }

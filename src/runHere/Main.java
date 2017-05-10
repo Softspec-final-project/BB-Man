@@ -56,15 +56,15 @@ public class Main extends PApplet {
     @Override
     public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == UP) {
-            g.addOperation(1);
+            g.addPlayerOperation(1);
         } else if (event.getKeyCode() == DOWN) {
-            g.addOperation(2);
+            g.addPlayerOperation(2);
         } else if (event.getKeyCode() == LEFT) {
-            g.addOperation(3);
+            g.addPlayerOperation(3);
         } else if (event.getKeyCode() == RIGHT) {
-            g.addOperation(4);
+            g.addPlayerOperation(4);
         } else if (event.getKeyCode() == 32) {
-            g.addOperation(0);
+            g.addPlayerOperation(0);
         }
     }
 }
