@@ -57,6 +57,7 @@ public class Man implements Sprite, Observer {
     @Override
     public void move() {
         //TODO: move player
+
     }
 
     @Override

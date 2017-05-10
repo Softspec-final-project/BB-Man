@@ -41,17 +41,17 @@ public class Map implements Component, Observer {
 
     private void readMaze() {
         blockList = new Block[13][15];
-        for(int i = 0, y = 0 ; i < 13 ; i++, y += 64) {
-            for(int j = 0, x = 0 ; j < 15 ; j++, x += 64) {
+        for(int i = 0 ; i < 13 ; i++) {
+            for(int j = 0 ; j < 15 ; j++) {
                 switch (maze[i][j]){
                     case 0:
                         blockList[i][j] = null;
                         break;
                     case 1:
-                        blockList[i][j] = new BlickBlock(x, y, this.display);
+                        blockList[i][j] = new BlickBlock(j*64, i*64, this.display);
                         break;
                     default:
-                        blockList[i][j] = new MetalBlock(x ,y, this.display);
+                        blockList[i][j] = new MetalBlock(j*64 ,i*64, this.display);
                 }
             }
         }

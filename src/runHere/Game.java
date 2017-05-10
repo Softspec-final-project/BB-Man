@@ -50,6 +50,6 @@ public class Game {
         for(Villain a : this.bot) {
             a.render();
         }
-        this.burn.render();
+//        this.burn.burnBabyBurn();
     }
 }

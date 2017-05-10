@@ -12,6 +12,7 @@ public class Main extends PApplet {
     public PImage ManB;
     public PImage ManR;
     public PImage ManL;
+    public PImage Bomb;
     public PImage VillainF;
     public PImage VillainB;
     public PImage VillainR;
@@ -36,6 +37,7 @@ public class Main extends PApplet {
         VillainB = loadImage("Images/Sprite/Creep/Villain_B.png");
         VillainR = loadImage("Images/Sprite/Creep/Villain_R.png");
         VillainL = loadImage("Images/Sprite/Creep/Villain_L.png");
+        Bomb = loadImage("Images/Bomb/Bomb.png");
         BlickBlock = loadImage("Images/Blick/BlickBlock.png");
         MetalBlock = loadImage("Images/Blick/MetalBlock.png");
         fill(120,50,240);
