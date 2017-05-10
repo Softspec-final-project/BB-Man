@@ -5,6 +5,7 @@ import game.Man;
 import game.Map;
 import game.Villain;
 import model.Operation;
+import model.Sprite;
 import operation.*;
 
 import java.awt.event.KeyAdapter;
@@ -55,26 +56,22 @@ public class Game {
         this.map.render();
         this.player.render();
         for (Villain a : this.bot) {
-            int o = (int)(Math.random() * 5);
-            addVillainOperation(a, o);
+//            int o = (int)(Math.random() * 5);
+//            addOperation(a, o);
             a.render();
         }
 //        this.burn.burnBabyBurn();
     }
 
-    public void addPlayerOperation(int o) {
+    public void addOperation(Sprite s, int o) {
         int[] step = move[o].getStep();
-        if (map.getBlockList()[(player.getY() + 64*step[1]) / 64][(player.getX() + 64*step[0]) / 64] == null) {
-            move[o].execute(player);
-            player.addReplay(move[o]);
+        if (map.getBlockList()[(s.getY() + 64*step[1]) / 64][(s.getX() + 64*step[0]) / 64] == null) {
+            move[o].execute(s);
+            s.addReplay(move[o]);
         }
     }
 
-    public void addVillainOperation(Villain a, int o) {
-        int[] step = move[o].getStep();
-        if (map.getBlockList()[(a.getY() + 64*step[1]) / 64][(a.getX() + 64*step[0]) / 64] == null) {
-            move[o].execute(a);
-            a.addReplay(move[o]);
-        }
+    public Man getPlayer() {
+        return player;
     }
 }

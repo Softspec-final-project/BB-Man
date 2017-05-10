@@ -97,7 +97,7 @@ public class Man implements Sprite, Observer {
         } else if(this.direction == 4) {
             display.image(display.ManR, this.x, this.y);
         } else {
-
+            // Plant Bomb
         }
     }
 }
