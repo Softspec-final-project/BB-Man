@@ -23,7 +23,6 @@ public class Bomb extends Observable implements Component , Block {
     public void burnBabyBurn(int x, int y){
         this.x = x;
         this.y = y;
-        render();
         setChanged();
 //        notifyObservers(String.format("",));
     }

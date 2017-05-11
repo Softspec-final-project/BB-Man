@@ -69,22 +69,32 @@ public class Game {
 
     public void addOperation(Sprite s, int o) {
         int[] step = move[o].getStep();
+
         try {
+
             if (o == 0) {
                 move[0].execute(s);
-            } else if (map.getBlockList()[(s.getY() + 64 * step[1]) / 64][(s.getX() + 64 * step[0]) / 64] == null && (((s.getY() + 64 * step[1]) != bomb.getY()) && ((s.getX() + 64 * step[0]) != bomb.getX()))) {
+            } else if (map.getBlockList()[(s.getY() + 64 * step[1]) / 64][(s.getX() + 64 * step[0]) / 64] == null && checkWalk(s, step)) {
                 move[o].execute(s);
                 s.addReplay(move[o]);
             }
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(e);
+//            System.out.println(e);
         }
+    }
+
+    private boolean checkWalk(Sprite s, int[] step) {
+        int sX = s.getX();
+        int sY = s.getY();
+        int bombX = bomb.getX();
+        int bombY =bomb.getY();
+        return (sX + 64 * step[0]) != bombX || (sY + 64 * step[1]) != bombY;
+
     }
 
     public Man getPlayer() {
         return player;
     }
 
-    public Map getMap() { return map; }
 }
