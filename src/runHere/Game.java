@@ -57,13 +57,17 @@ public class Game {
     public void repaint() {
         //TODO: call render to show on the window
         this.map.render();
-        this.player.render();
+        if (player.isAlive()) {
+            this.player.render();
+        }
         for (Villain a : this.bot) {
-            if (display.frameCount % 15 == 0) {
-                int o = random.nextInt(5);
-                addOperation(a, o);
+            if (a.isAlive()) {
+                if (display.frameCount % 15 == 0) {
+                    int o = random.nextInt(5);
+                    addOperation(a, o);
+                }
+                a.render();
             }
-            a.render();
         }
     }
 
@@ -74,7 +78,7 @@ public class Game {
 
             if (o == 0) {
                 move[0].execute(s);
-            } else if (map.getBlockList()[(s.getY() + 64 * step[1]) / 64][(s.getX() + 64 * step[0]) / 64] == null && checkWalk(s, step)) {
+            } else if (s.isAlive() && map.getBlockList()[(s.getY() + 64 * step[1]) / 64][(s.getX() + 64 * step[0]) / 64] == null && checkWalk(s, step)) {
                 move[o].execute(s);
                 s.addReplay(move[o]);
             }
