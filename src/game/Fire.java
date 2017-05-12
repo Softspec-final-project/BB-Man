@@ -10,33 +10,33 @@ public class Fire implements Component {
     private int x;
     private int y;
     private Main display;
-    private boolean isFireing;
+    private boolean isFiring;
     private int timeStamp;
 
     public Fire(Main display) {
         this.x = -64;
         this.y = -64;
         this.timeStamp = 0;
-        this.isFireing = false;
+        this.isFiring = false;
         this.display = display;
     }
 
     public void start(int x, int y) {
-        this.isFireing = true;
+        this.isFiring = true;
         this.x = x;
         this.y = y;
         this.timeStamp = display.millis();
     }
 
     public void stop() {
-        this.isFireing = false;
+        this.isFiring = false;
         this.x = -64;
         this.y = -64;
     }
 
 
-    public boolean isFireing() {
-        return isFireing;
+    public boolean isFiring() {
+        return isFiring;
     }
 
     @Override

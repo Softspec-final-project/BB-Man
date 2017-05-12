@@ -9,22 +9,22 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 public class Bomb extends Observable implements Component , Block {
-    private final int radius = 1;
     private int x;
     private int y;
-    private Main display;
-    private int timeStamp;
-    private ArrayList <Fire> fire;
-    private  boolean isFire;
     private int posX;
     private int posY;
+    private Main display;
+    private int timeStamp;
+    private  boolean isFire;
+    private final int radius = 1;
+    private ArrayList <Fire> fire;
 
     public Bomb(Main display) {
         this.x = -64;
         this.y = -64;
-        this.display = display;
         this.timeStamp = 0;
         this.isFire = false;
+        this.display = display;
         this.fire = new ArrayList<>();
         for(int i = 0 ; i < (radius*4)+1 ; i++){
             fire.add(new Fire(display));
@@ -52,7 +52,7 @@ public class Bomb extends Observable implements Component , Block {
             this.x = -64;
             this.y = -64;
 
-            if(!fire.get(0).isFireing()) {
+            if(!fire.get(0).isFiring()) {
                 fire.get(0).start(posX, posY);
                 int runner = 1;
                 for(int i = 1 ; i <= radius ; i++, runner++) {
@@ -68,7 +68,7 @@ public class Bomb extends Observable implements Component , Block {
             for(Fire f : fire) {
                 f.render();
             }
-            this.isFire = fire.get(0).isFireing();
+            this.isFire = fire.get(0).isFiring();
         }
     }
 
