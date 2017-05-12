@@ -9,41 +9,55 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Random;
 
-public class Game {
+public class Game implements Observer{
     public static Game instance;
     private Map map;
     private Bomb[] bomb;
     private Man player;
+    private Boolean isReplay;
     private Main display;
-    private int[][] field;
+    private int numBotDied;
     private ArrayList<Villain> bot;
     private Random random = new Random(System.currentTimeMillis());
     private Operation[] move = {new PlantBomb(), new MoveDown(), new MoveUp(), new MoveLeft(), new MoveRight()};
+    private long replayStartTime;
+    private long gameStartTime;
+    private ArrayList<Sprite> sprites;
 
     private Game(Main display) {
+        this.map = new Map(display);
+        this.display = display;
+        this.numBotDied = 0;
+        this.isReplay = false;
         this.player = Man.getInstance();
-        player.addDisplay(display);
-        bot = new ArrayList<>();
-        this.bot.add(new Villain(13*64,12*64, display));
-        this.bot.add(new Villain(13*64,10*64, display));
-        this.bot.add(new Villain(12*64,11*64, display));
+        this.sprites = new ArrayList<>();
+        this.player.addDisplay(display);
+        this.bot = new ArrayList<>();
+        this.bot.add(new Villain(13*64,11*64, display));
+        this.bot.add(new Villain(13*64,1*64, display));
+        this.bot.add(new Villain(1*64,11*64, display));
         this.bomb = new Bomb[bot.size() + 1];
         for (int i = 0; i < bot.size() + 1; i++) {
             this.bomb[i] = new Bomb(display);
             this.bomb[i].addObserver(player);
+            this.bomb[i].addObserver(map);
             if (i < bot.size()) {
                 this.bot.get(i).addBomb(this.bomb[i]);
             }
         }
         for (Villain v: bot) {
             this.bomb[this.bot.size()].addObserver(v);
+            v.addObserver(this);
+            sprites.add(v);
         }
-        this.map = new Map(display);
-        this.display = display;
         this.player.addBomb(bomb[this.bot.size()]);
-
+        player.addObserver(this);
+        this.sprites.add(player);
+        gameStartTime = System.currentTimeMillis();
     }
 
     public static Game getInstance(Main display) {
@@ -53,27 +67,26 @@ public class Game {
         return instance;
     }
 
-    public int[][] getField() {
-        return field;
-    }
-
-    public void setField(int[][] field) {
-        this.field = field;
-        this.map.setMaze(field);
-    }
-
     public void repaint() {
         //TODO: call render to show on the window
-        if (player.isAlive()) {
-            this.player.render();
+        for (Sprite s : sprites) {
+            if (s.isAlive()) {
+                s.render();
+            }
         }
-        for (Villain a : this.bot) {
-            if (a.isAlive()) {
-                if (display.frameCount % 30 == 0) {
-                    int o = random.nextInt(5);
-                    addOperation(a, o);
+        if (isReplay) {
+            for (Sprite s : sprites) {
+                actionReplay(s);
+            }
+        } else {
+            for (Villain a : this.bot) {
+                if (a.isAlive()) {
+                    if (display.frameCount % 30 == 0) {
+                        int o = random.nextInt(5);
+                        addOperation(a, o);
+                    }
+                    a.render();
                 }
-                a.render();
             }
         }
         this.map.render();
@@ -85,10 +98,13 @@ public class Game {
         try {
             if (o == 0 && !s.getBomb().isFire()) {
                 move[0].execute(s);
+                s.addReplay(move[o]);
+                s.addTime(System.currentTimeMillis());
             } else if (s.isAlive() && map.getBlockList()[(s.getY() + 64 * step[1]) / 64][(s.getX() + 64 * step[0]) / 64] == null
                     && checkWalk(s, step)) {
                 move[o].execute(s);
                 s.addReplay(move[o]);
+                s.addTime(System.currentTimeMillis());
             }
 
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -117,4 +133,50 @@ public class Game {
         return player;
     }
 
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (!isReplay) {
+            if ((int) arg == 0) {
+                System.out.println("Replay Start");
+                replay();
+            } else {
+                numBotDied++;
+                if (numBotDied == bot.size()) {
+                    display.delay(3000);
+                    replay();
+                }
+            }
+        }
+    }
+
+    public void replay() {
+        System.out.println("replay");
+        isReplay = true;
+        for(Sprite s : sprites) {
+            s.reset();
+        }
+        map.readMaze();
+        for (int i = 0; i < bomb.length; i++) {
+            bomb[i].reset();
+        }
+        replayStartTime = System.currentTimeMillis();
+    }
+
+    public Boolean getReplay() {
+        return isReplay;
+    }
+
+    public void actionReplay(Sprite s) {
+        try {
+            if (System.currentTimeMillis() - replayStartTime  >= s.getFlashPoint().get(0) - gameStartTime) {
+                System.out.println("in");
+                s.getReplay().get(0).execute(s);
+                s.getReplay().remove(0);
+                s.getFlashPoint().remove(0);
+            }
+        } catch (IndexOutOfBoundsException e) {
+
+        }
+    }
 }

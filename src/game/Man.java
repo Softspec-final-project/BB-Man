@@ -8,12 +8,13 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Man implements Sprite, Observer {
+public class Man extends Observable implements Sprite, Observer {
     private int x;
     private int y;
     private Bomb bomb;
     private Main display;
     private ArrayList<Operation> replay;
+    private ArrayList<Long> flashPoint;
     ///////////////////////////////////////////////
     //  1 = front, 2 = back, 3 = left, 4 = right //
     ///////////////////////////////////////////////
@@ -26,6 +27,7 @@ public class Man implements Sprite, Observer {
         this.y = 64;
         this.direction = 1;
         this.isAlive = true;
+        this.flashPoint = new ArrayList<>();
         this.replay = new ArrayList<>();
     }
 
@@ -92,13 +94,19 @@ public class Man implements Sprite, Observer {
     }
 
     @Override
+    public void addTime(Long l) {
+        flashPoint.add(l);
+    }
+
+    @Override
     public void update(Observable o, Object arg) {
         //TODO: kill player if in the dead area
         Coordinates cs = Coordinates.getInstance();
         for (int i = 0; i < cs.getXs().size(); i++) {
             if (this.x == cs.getXs().get(i) && this.y == cs.getYs().get(i)) {
                 kill();
-                display.exit();
+                setChanged();
+                notifyObservers(0);
             }
         }
     }
@@ -121,5 +129,23 @@ public class Man implements Sprite, Observer {
     public void addBomb(Bomb bomb) {
         this.bomb = bomb;
         this.bomb.setType(0);
+    }
+
+    public void reset() {
+        this.x = 64;
+        this.y = 64;
+        this.direction = 1;
+        this.isAlive = true;
+        render();
+    }
+
+    @Override
+    public ArrayList<Operation> getReplay() {
+        return replay;
+    }
+
+    @Override
+    public ArrayList<Long> getFlashPoint() {
+        return flashPoint;
     }
 }

@@ -8,21 +8,27 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Villain implements Sprite, Observer {
+public class Villain extends Observable implements Sprite, Observer {
+    private final int xF;
+    private final int yF;
     private int x;
     private int y;
     private Main display;
     private int direction;
     private boolean isAlive;
     private ArrayList<Operation> replay;
+    private ArrayList<Long> flashPoint;
     private Bomb bomb;
 
     public Villain(int x, int y, Main display) {
+        this.xF = x;
+        this.yF = y;
         this.x = x;
         this.y = y;
         this.display = display;
         this.direction = 1;
         this.isAlive = true;
+        this.flashPoint = new ArrayList<>();
         this.replay = new ArrayList<>();
     }
 
@@ -71,12 +77,19 @@ public class Villain implements Sprite, Observer {
     }
 
     @Override
+    public void addTime(Long l) {
+        flashPoint.add(l);
+    }
+
+    @Override
     public void update(Observable o, Object arg) {
         //TODO kill villain in dead area
         Coordinates cs = Coordinates.getInstance();
         for (int i = 0; i < cs.getXs().size(); i++) {
             if (cs.getTypes().get(i) == 0 && this.x == cs.getXs().get(i) && this.y == cs.getYs().get(i)) {
                 kill();
+                setChanged();
+                notifyObservers(1);
             }
         }
 
@@ -106,4 +119,21 @@ public class Villain implements Sprite, Observer {
         this.bomb = bomb;
     }
 
+    public void reset() {
+        x = xF;
+        y = yF;
+        isAlive = true;
+        direction = 1;
+        render();
+    }
+
+    @Override
+    public ArrayList<Operation> getReplay() {
+        return replay;
+    }
+
+    @Override
+    public ArrayList<Long> getFlashPoint() {
+        return flashPoint;
+    }
 }

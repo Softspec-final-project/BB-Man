@@ -41,7 +41,7 @@ public class Fire implements Component {
 
     @Override
     public void render() {
-        if(display.millis() - timeStamp < 1000) {
+        if(display.millis() - timeStamp < 500) {
             display.image(display.Flame.get(0), this.x, this.y);
         } else {
             stop();
@@ -49,5 +49,13 @@ public class Fire implements Component {
                 Coordinates.getInstance().removeHead();
             }
         }
+    }
+
+    public void reset() {
+        this.x = -64;
+        this.y = -64;
+        this.timeStamp = 0;
+        this.isFiring = false;
+        render();
     }
 }

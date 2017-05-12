@@ -60,7 +60,7 @@ public class Main extends PApplet {
 
     @Override
     public void keyPressed(KeyEvent event) {
-        if (canMove) {
+        if (!g.getReplay() && canMove) {
             canMove = false;
             if (event.getKeyCode() == UP) {
                 g.addOperation(g.getPlayer(), 1);

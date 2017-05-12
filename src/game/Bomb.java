@@ -103,4 +103,15 @@ public class Bomb extends Observable implements Component , Block {
     public boolean isFire() {
         return isFire;
     }
+
+    public void reset() {
+        this.x = -64;
+        this.y = -64;
+        this.timeStamp = 0;
+        this.isFire = false;
+        for (Fire f : fire) {
+            f.reset();
+        }
+        render();
+    }
 }

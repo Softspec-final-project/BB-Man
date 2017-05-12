@@ -3,6 +3,9 @@ package game;
 import model.Block;
 import runHere.Main;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import static processing.core.PApplet.second;
 
 public class BrickBlock implements Block {
@@ -20,5 +23,13 @@ public class BrickBlock implements Block {
     @Override
     public void render() {
         display.image(display.BlickBlock, this.x, this.y);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }
