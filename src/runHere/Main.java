@@ -4,6 +4,8 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.event.KeyEvent;
 
+import java.util.ArrayList;
+
 
 public class Main extends PApplet {
     public Game g = Game.getInstance(this);
@@ -19,6 +21,7 @@ public class Main extends PApplet {
     public PImage VillainL;
     public PImage BlickBlock;
     public PImage MetalBlock;
+    public ArrayList<PImage> Flame;
     private boolean canMove = true;
     public static void main(String[] args) {
         PApplet.main("runHere.Main");
@@ -29,7 +32,13 @@ public class Main extends PApplet {
     }
 
     public void setup() {
+        Flame = new ArrayList<>();
         Floor = loadImage("Images/Floor.png");
+        Flame.add(loadImage("Images/Flame/Flame_f00.png"));
+        Flame.add(loadImage("Images/Flame/Flame_f01.png"));
+        Flame.add(loadImage("Images/Flame/Flame_f02.png"));
+        Flame.add(loadImage("Images/Flame/Flame_f03.png"));
+        Flame.add(loadImage("Images/Flame/Flame_f04.png"));
         ManF = loadImage("Images/Sprite/Bomberman/BBMan_F.png");
         ManB = loadImage("Images/Sprite/Bomberman/BBMan_B.png");
         ManR = loadImage("Images/Sprite/Bomberman/BBMan_R.png");

@@ -32,7 +32,7 @@ public class Game {
         this.bot.add(new Villain(13*64,11*64, display));
         this.bot.add(new Villain(13*64,10*64, display));
         this.bot.add(new Villain(12*64,11*64, display));
-        this.bomb = new Bomb(-64, -64, display, this);
+        this.bomb = new Bomb(display);
         this.map = new Map(display);
         this.display = display;
         this.player.addBomb(this.bomb);

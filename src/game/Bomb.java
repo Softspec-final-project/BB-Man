@@ -12,28 +12,36 @@ public class Bomb extends Observable implements Component , Block {
     private int x;
     private int y;
     private Main display;
-    private Game game;
+    private int timeStamp;
+    private Fire f;
 
-    public Bomb(int x, int y, Main display, Game g) {
-        this.x = x;
-        this.y = y;
+    public Bomb(Main display) {
+        this.x = -64;
+        this.y = -64;
         this.display = display;
+        this.timeStamp = 0;
+        this.f = new Fire(display);
     }
 
     public void burnBabyBurn(int x, int y){
         this.x = x;
         this.y = y;
+        this.f.start(x+64, y);
+        this.timeStamp = display.millis();
+        render();
         setChanged();
 //        notifyObservers(String.format("",));
     }
 
     @Override
     public void render() {
-//        int start = display.second();
-//        if(Math.abs(display.second() - start) != 3) {
+        if(display.millis() - this.timeStamp < 2000) {
             display.image(display.Bomb, this.x, this.y);
-//        }
-//        display.redraw();
+        } else {
+            this.x = -64;
+            this.y = -64;
+            this.f.stop();
+        }
     }
 
     public int getX() {
