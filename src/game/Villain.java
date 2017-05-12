@@ -15,6 +15,7 @@ public class Villain implements Sprite, Observer {
     private int direction;
     private boolean isAlive;
     private ArrayList<Operation> replay;
+    private Bomb bomb;
 
     public Villain(int x, int y, Main display) {
         this.x = x;
@@ -31,7 +32,12 @@ public class Villain implements Sprite, Observer {
 
     @Override
     public void boomBoom() {
+        bomb.burnBabyBurn(this.x, this.y);
+    }
 
+    @Override
+    public Bomb getBomb() {
+        return this.bomb;
     }
 
     public void setX(int x) {
@@ -67,13 +73,24 @@ public class Villain implements Sprite, Observer {
     @Override
     public void update(Observable o, Object arg) {
         //TODO kill villain in dead area
-//        if(){
-//            this.isAlive = false;
-//        }
+        Coordinates cs = Coordinates.getInstance();
+        for (int i = 0; i < cs.getXs().size(); i++) {
+            if (cs.getTypes().get(i) == 0 && this.x == cs.getXs().get(i) && this.y == cs.getYs().get(i)) {
+                kill();
+            }
+        }
+
+    }
+
+    public void kill() {
+        this.isAlive = false;
+        setX(1);
+        setY(1);
     }
 
     @Override
     public void render() {
+        bomb.render();
         if(this.direction == 1) {
             display.image(display.VillainF, this.x, this.y);
         } else if(this.direction == 2) {
@@ -84,4 +101,9 @@ public class Villain implements Sprite, Observer {
             display.image(display.VillainR, this.x, this.y);
         }
     }
+
+    public void addBomb(Bomb bomb) {
+        this.bomb = bomb;
+    }
+
 }

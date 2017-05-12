@@ -1,5 +1,7 @@
 package model;
 
+import game.Bomb;
+
 public interface Sprite extends Component {
     public void move(int m, int x, int y);
     public boolean isAlive();
@@ -7,4 +9,5 @@ public interface Sprite extends Component {
     public int getY();
     public int getX();
     public void boomBoom();
+    public Bomb getBomb();
 }

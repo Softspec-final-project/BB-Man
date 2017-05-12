@@ -68,6 +68,11 @@ public class Man implements Sprite, Observer {
     }
 
     @Override
+    public Bomb getBomb() {
+        return this.bomb;
+    }
+
+    @Override
     public void move(int m, int x, int y) {
         //TODO: move player
         this.direction = m;
@@ -88,8 +93,14 @@ public class Man implements Sprite, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        //TODO: kill player if in the dead area or hit villain
-
+        //TODO: kill player if in the dead area
+        Coordinates cs = Coordinates.getInstance();
+        for (int i = 0; i < cs.getXs().size(); i++) {
+            if (this.x == cs.getXs().get(i) && this.y == cs.getYs().get(i)) {
+                kill();
+                display.exit();
+            }
+        }
     }
 
     @Override
@@ -109,5 +120,6 @@ public class Man implements Sprite, Observer {
 
     public void addBomb(Bomb bomb) {
         this.bomb = bomb;
+        this.bomb.setType(0);
     }
 }

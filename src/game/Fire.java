@@ -45,6 +45,9 @@ public class Fire implements Component {
             display.image(display.Flame.get(0), this.x, this.y);
         } else {
             stop();
+            if (Coordinates.getInstance().getXs().size() > 0) {
+                Coordinates.getInstance().removeHead();
+            }
         }
     }
 }
