@@ -11,10 +11,12 @@ public class Fire implements Component {
     private int y;
     private Main display;
     private boolean isFireing;
+    private int timeStamp;
 
     public Fire(Main display) {
-        this.x = x;
-        this.y = y;
+        this.x = -64;
+        this.y = -64;
+        this.timeStamp = 0;
         this.isFireing = false;
         this.display = display;
     }
@@ -23,6 +25,7 @@ public class Fire implements Component {
         this.isFireing = true;
         this.x = x;
         this.y = y;
+        this.timeStamp = display.millis();
     }
 
     public void stop() {
@@ -31,10 +34,17 @@ public class Fire implements Component {
         this.y = -64;
     }
 
+
+    public boolean isFireing() {
+        return isFireing;
+    }
+
     @Override
     public void render() {
-        for(int i = 0 ; isFireing ; i++) {
-            display.image(display.Flame.get(i % 4), this.x, this.y);
+        if(display.millis() - timeStamp < 1000) {
+            display.image(display.Flame.get(0), this.x, this.y);
+        } else {
+            stop();
         }
     }
 }

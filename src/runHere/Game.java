@@ -56,7 +56,6 @@ public class Game {
 
     public void repaint() {
         //TODO: call render to show on the window
-        this.map.render();
         if (player.isAlive()) {
             this.player.render();
         }
@@ -69,6 +68,7 @@ public class Game {
                 a.render();
             }
         }
+        this.map.render();
     }
 
     public void addOperation(Sprite s, int o) {

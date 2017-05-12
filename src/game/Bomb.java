@@ -5,28 +5,36 @@ import model.Component;
 import runHere.Game;
 import runHere.Main;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class Bomb extends Observable implements Component , Block {
-    private final int radius = 2;
+    private final int radius = 1;
     private int x;
     private int y;
     private Main display;
     private int timeStamp;
-    private Fire f;
+    private ArrayList <Fire> fire;
+    private  boolean isFire;
+    private int posX;
+    private int posY;
 
     public Bomb(Main display) {
         this.x = -64;
         this.y = -64;
         this.display = display;
         this.timeStamp = 0;
-        this.f = new Fire(display);
+        this.isFire = false;
+        this.fire = new ArrayList<>();
+        for(int i = 0 ; i < (radius*4)+1 ; i++){
+            fire.add(new Fire(display));
+        }
     }
 
     public void burnBabyBurn(int x, int y){
         this.x = x;
         this.y = y;
-        this.f.start(x+64, y);
+        this.isFire = true;
         this.timeStamp = display.millis();
         render();
         setChanged();
@@ -37,10 +45,30 @@ public class Bomb extends Observable implements Component , Block {
     public void render() {
         if(display.millis() - this.timeStamp < 2000) {
             display.image(display.Bomb, this.x, this.y);
-        } else {
+            posX = this.x;
+            posY = this.y;
+
+        } else if(isFire) {
             this.x = -64;
             this.y = -64;
-            this.f.stop();
+
+            if(!fire.get(0).isFireing()) {
+                fire.get(0).start(posX, posY);
+                int runner = 1;
+                for(int i = 1 ; i <= radius ; i++, runner++) {
+                    fire.get(runner).start(posX+(64*i), posY);
+                }for(int i = 1 ; i <= radius ; i++, runner++) {
+                    fire.get(runner).start(posX-(64*i), posY);
+                }for(int i = 1 ; i <= radius ; i++, runner++) {
+                    fire.get(runner).start(posX, posY+(64*i));
+                }for(int i = 1 ; i <= radius ; i++, runner++) {
+                    fire.get(runner).start(posX, posY-(64*i));
+                }
+            }
+            for(Fire f : fire) {
+                f.render();
+            }
+            this.isFire = fire.get(0).isFireing();
         }
     }
 
