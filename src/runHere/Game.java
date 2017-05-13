@@ -143,7 +143,7 @@ public class Game implements Observer{
             } else {
                 numBotDied++;
                 if (numBotDied == bot.size()) {
-                    display.delay(3000);
+                    System.out.println("Replay Start");
                     replay();
                 }
             }
@@ -151,7 +151,6 @@ public class Game implements Observer{
     }
 
     public void replay() {
-        System.out.println("replay");
         isReplay = true;
         for(Sprite s : sprites) {
             s.reset();
@@ -170,7 +169,6 @@ public class Game implements Observer{
     public void actionReplay(Sprite s) {
         try {
             if (System.currentTimeMillis() - replayStartTime  >= s.getFlashPoint().get(0) - gameStartTime) {
-                System.out.println("in");
                 s.getReplay().get(0).execute(s);
                 s.getReplay().remove(0);
                 s.getFlashPoint().remove(0);
