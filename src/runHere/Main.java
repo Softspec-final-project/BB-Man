@@ -6,10 +6,9 @@ import processing.event.KeyEvent;
 
 import java.util.ArrayList;
 
-
 public class Main extends PApplet {
-    public Game g = Game.getInstance(this);
-    public PImage Floor;
+    private Game g = Game.getInstance(this);
+    private PImage Floor;
     public PImage ManF;
     public PImage ManB;
     public PImage ManR;

@@ -62,6 +62,7 @@ public class Man extends Observable implements Sprite, Observer {
         this.isAlive = false;
         setX(1);
         setY(1);
+        bomb.reset();
     }
 
     @Override
@@ -146,4 +147,5 @@ public class Man extends Observable implements Sprite, Observer {
     public ArrayList<Long> getFlashPoint() {
         return flashPoint;
     }
+
 }

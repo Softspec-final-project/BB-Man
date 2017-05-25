@@ -3,9 +3,6 @@ package game;
 import model.Component;
 import runHere.Main;
 
-/**
- * Created by Thanut Sajjakulnukti 5810545416 on 5/5/2017 AD.
- */
 public class Fire implements Component {
     private int x;
     private int y;

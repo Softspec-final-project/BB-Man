@@ -69,6 +69,7 @@ public class Game implements Observer{
 
     public void repaint() {
         for (Sprite s : sprites) {
+            System.out.println(s.getClass() + " " + s.isAlive());
             if (s.isAlive()) {
                 s.render();
             }
@@ -151,6 +152,7 @@ public class Game implements Observer{
 
     public void replay() {
         isReplay = true;
+        sprites.get(3).reset();
         for(Sprite s : sprites) {
             s.reset();
         }
