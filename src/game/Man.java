@@ -76,7 +76,6 @@ public class Man extends Observable implements Sprite, Observer {
 
     @Override
     public void move(int m, int x, int y) {
-        //TODO: move player
         this.direction = m;
         this.x += x;
         this.y += y;
@@ -100,7 +99,6 @@ public class Man extends Observable implements Sprite, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        //TODO: kill player if in the dead area
         Coordinates cs = Coordinates.getInstance();
         for (int i = 0; i < cs.getXs().size(); i++) {
             if (this.x == cs.getXs().get(i) && this.y == cs.getYs().get(i)) {

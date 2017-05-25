@@ -83,7 +83,6 @@ public class Villain extends Observable implements Sprite, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        //TODO kill villain in dead area
         Coordinates cs = Coordinates.getInstance();
         for (int i = 0; i < cs.getXs().size(); i++) {
             if (cs.getTypes().get(i) == 0 && this.x == cs.getXs().get(i) && this.y == cs.getYs().get(i)) {
@@ -99,6 +98,7 @@ public class Villain extends Observable implements Sprite, Observer {
         this.isAlive = false;
         setX(1);
         setY(1);
+        bomb.reset();
     }
 
     @Override

@@ -68,7 +68,6 @@ public class Game implements Observer{
     }
 
     public void repaint() {
-        //TODO: call render to show on the window
         for (Sprite s : sprites) {
             if (s.isAlive()) {
                 s.render();
@@ -108,7 +107,7 @@ public class Game implements Observer{
             }
 
         } catch (ArrayIndexOutOfBoundsException e) {
-//            System.out.println(e);
+
         }
     }
 

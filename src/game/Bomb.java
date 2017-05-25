@@ -43,7 +43,7 @@ public class Bomb extends Observable implements Component , Block {
 
     @Override
     public void render() {
-        if(display.millis() - this.timeStamp < 2000) {
+        if(display.millis() - this.timeStamp < 1500) {
             display.image(display.Bomb, this.x, this.y);
             posX = this.x;
             posY = this.y;
