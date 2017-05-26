@@ -2,8 +2,8 @@
 A game for Software Specification & Design
 
 ## **Project collaborators**
-1. [Nutthapol Sinthaveelert](https://github.com/babestvl)
-2. [Thanut Sajjakulnukit](https://github.com/oatThanut)
+1. [Nutthapol Sinthaveelert 5810546641](https://github.com/babestvl)
+2. [Thanut Sajjakulnukit 5810545416](https://github.com/oatThanut)
 
 ## **Use cases**
 1. Player has only one life
