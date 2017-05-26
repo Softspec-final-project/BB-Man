@@ -50,3 +50,4 @@ JAR-file is in /out/artifacts/BBMan_jar
 * Start and End game
 * Find and use external library
 * Refactor code
+* Built JAR
