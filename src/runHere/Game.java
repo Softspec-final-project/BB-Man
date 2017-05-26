@@ -109,18 +109,16 @@ public class Game implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
-        if (!isReplay) {
-            if ((int) arg == 0) {
-                // man down
-                display.END_TITLE = display.LOSE;
+        if ((int) arg == 0) {
+            // man down
+            display.END_TITLE = display.LOSE;
+            display.isEnd = true;
+        } else {
+            numBotDied++;
+            if (numBotDied == bot.size()) {
+                // villain down
+                display.END_TITLE = display.WIN;
                 display.isEnd = true;
-            } else {
-                numBotDied++;
-                if (numBotDied == bot.size()) {
-                    // villain down
-                    display.END_TITLE = display.WIN;
-                    display.isEnd = true;
-                }
             }
         }
     }
@@ -139,7 +137,8 @@ public class Game implements Observer{
     }
 
     public void restart() {
-        sprites.get(3).reset();
+        isReplay = false;
+        numBotDied = 0;
         for(Sprite s : sprites) {
             s.reset();
             s.clearReplay();
@@ -194,5 +193,4 @@ public class Game implements Observer{
         }
         this.map.render();
     }
-
 }
