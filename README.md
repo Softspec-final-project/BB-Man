@@ -35,3 +35,9 @@ A game for Software Specification & Design
 * Enemy and player died when fire hit them
 
 ## **Thanut-Part**
+* Initial project
+* Plant the bomb and fire
+* All about graphic and set position
+* Seperate object
+* Start and End game
+* Find and use external library
