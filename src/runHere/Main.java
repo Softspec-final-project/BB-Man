@@ -25,6 +25,7 @@ public class Main extends PApplet {
     public PImage END_TITLE;
     public PImage BlickBlock;
     public PImage MetalBlock;
+    public PImage DISABLE;
     public ArrayList<PImage> Flame;
     private boolean canMove = true;
     public boolean isStart = false;
@@ -44,11 +45,14 @@ public class Main extends PApplet {
         LOSE = loadImage("Images/LOSE.png");
         Floor = loadImage("Images/Floor.png");
         Title = loadImage("Images/Title.png");
+        Bomb = loadImage("Images/Bomb/Bomb.png");
         Flame.add(loadImage("Images/Flame/Flame_f00.png"));
         Flame.add(loadImage("Images/Flame/Flame_f01.png"));
         Flame.add(loadImage("Images/Flame/Flame_f02.png"));
         Flame.add(loadImage("Images/Flame/Flame_f03.png"));
         Flame.add(loadImage("Images/Flame/Flame_f04.png"));
+        BlickBlock = loadImage("Images/Blick/BlickBlock.png");
+        MetalBlock = loadImage("Images/Blick/MetalBlock.png");
         ManF = loadImage("Images/Sprite/Bomberman/BBMan_F.png");
         ManB = loadImage("Images/Sprite/Bomberman/BBMan_B.png");
         ManR = loadImage("Images/Sprite/Bomberman/BBMan_R.png");
@@ -57,9 +61,7 @@ public class Main extends PApplet {
         VillainB = loadImage("Images/Sprite/Creep/Villain_B.png");
         VillainR = loadImage("Images/Sprite/Creep/Villain_R.png");
         VillainL = loadImage("Images/Sprite/Creep/Villain_L.png");
-        Bomb = loadImage("Images/Bomb/Bomb.png");
-        BlickBlock = loadImage("Images/Blick/BlickBlock.png");
-        MetalBlock = loadImage("Images/Blick/MetalBlock.png");
+        DISABLE = loadImage("Images/disable_replay.png");
         fill(120,50,240);
     }
 
@@ -69,6 +71,7 @@ public class Main extends PApplet {
             if(isEnd){
                 image(END, 0, 0);
                 image(END_TITLE, 0, 0);
+                if(g.getReplay()) image(DISABLE, 0, 0);
             }
         } else {
             image(Title, 0, 0);
@@ -79,9 +82,11 @@ public class Main extends PApplet {
     public void mousePressed() {
         super.mousePressed();
         if(mouseX >=192 && mouseX <=435 && mouseY >=528 && mouseY <=604 ) {
-            isStart = true;
-            isEnd = false;
-            g.replay();
+            if(!g.getReplay()){
+                isStart = true;
+                isEnd = false;
+                g.replay();
+            }
         }
         if(mouseX >=548 && mouseX <=791 && mouseY >=528 && mouseY <=604 ) {
             isStart = true;
