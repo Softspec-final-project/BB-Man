@@ -124,6 +124,7 @@ public class Game implements Observer{
 
     public void replay() {
         isReplay = true;
+        numBotDied = 0;
         for(Sprite s : sprites) {
             s.reset();
         }
