@@ -139,6 +139,7 @@ public class Game implements Observer{
     }
 
     public void restart() {
+        numBotDied = 0;
         sprites.get(3).reset();
         for(Sprite s : sprites) {
             s.reset();
