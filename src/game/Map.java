@@ -86,6 +86,10 @@ public class Map implements Component, Observer {
         }
     }
 
+    public Block[][] getBlockList() {
+        return blockList;
+    }
+
     @Override
     public void render() {
         for(Block[] a : blockList) {
@@ -95,10 +99,6 @@ public class Map implements Component, Observer {
                 }
             }
         }
-    }
-
-    public Block[][] getBlockList() {
-        return blockList;
     }
 
 }

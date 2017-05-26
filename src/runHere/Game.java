@@ -5,9 +5,6 @@ import model.Operation;
 import model.Sprite;
 import operation.*;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -16,17 +13,18 @@ import java.util.Random;
 public class Game implements Observer{
     public static Game instance;
     private Map map;
-    private Bomb[] bomb;
     private Man player;
-    private Boolean isReplay;
+    private Bomb[] bomb;
     private Main display;
     private int numBotDied;
+    private Boolean isReplay;
+    private long gameStartTime;
+    private long replayStartTime;
     private ArrayList<Villain> bot;
+    private static Boolean isStart = false;
+    private ArrayList<Sprite> sprites;
     private Random random = new Random(System.currentTimeMillis());
     private Operation[] move = {new PlantBomb(), new MoveDown(), new MoveUp(), new MoveLeft(), new MoveRight()};
-    private long replayStartTime;
-    private long gameStartTime;
-    private ArrayList<Sprite> sprites;
 
     private Game(Main display) {
         this.map = new Map(display);
@@ -65,31 +63,6 @@ public class Game implements Observer{
             instance = new Game(display);
         }
         return instance;
-    }
-
-    public void repaint() {
-        for (Sprite s : sprites) {
-            System.out.println(s.getClass() + " " + s.isAlive());
-            if (s.isAlive()) {
-                s.render();
-            }
-        }
-        if (isReplay) {
-            for (Sprite s : sprites) {
-                actionReplay(s);
-            }
-        } else {
-            for (Villain a : this.bot) {
-                if (a.isAlive()) {
-                    if (display.frameCount % 30 == 0) {
-                        int o = random.nextInt(5);
-                        addOperation(a, o);
-                    }
-                    a.render();
-                }
-            }
-        }
-        this.map.render();
     }
 
     public void addOperation(Sprite s, int o) {
@@ -138,13 +111,19 @@ public class Game implements Observer{
     public void update(Observable o, Object arg) {
         if (!isReplay) {
             if ((int) arg == 0) {
+                // man down
                 System.out.println("Replay Start");
-                replay();
+                display.END_TITLE = display.LOSE;
+                display.isEnd = true;
+//                replay();
             } else {
                 numBotDied++;
                 if (numBotDied == bot.size()) {
+                    // villain down
                     System.out.println("Replay Start");
-                    replay();
+                    display.END_TITLE = display.WIN;
+                    display.isEnd = true;
+//                    replay();
                 }
             }
         }
@@ -163,6 +142,18 @@ public class Game implements Observer{
         replayStartTime = System.currentTimeMillis();
     }
 
+    public void restart() {
+        //TODO reset replay array
+        sprites.get(3).reset();
+        for(Sprite s : sprites) {
+            s.reset();
+        }
+        map.readMaze();
+        for (int i = 0; i < bomb.length; i++) {
+            bomb[i].reset();
+        }
+    }
+
     public Boolean getReplay() {
         return isReplay;
     }
@@ -178,4 +169,31 @@ public class Game implements Observer{
 
         }
     }
+
+    public void repaint() {
+        display.image(display.Floor, 0, 0);
+        for (Sprite s : sprites) {
+            System.out.println(s.getClass() + " " + s.isAlive());
+            if (s.isAlive()) {
+                s.render();
+            }
+        }
+        if (isReplay) {
+            for (Sprite s : sprites) {
+                actionReplay(s);
+            }
+        } else {
+            for (Villain a : this.bot) {
+                if (a.isAlive()) {
+                    if (display.frameCount % 30 == 0) {
+                        int o = random.nextInt(5);
+                        addOperation(a, o);
+                    }
+                    a.render();
+                }
+            }
+        }
+        this.map.render();
+    }
+
 }

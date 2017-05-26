@@ -101,20 +101,6 @@ public class Villain extends Observable implements Sprite, Observer {
         bomb.reset();
     }
 
-    @Override
-    public void render() {
-        bomb.render();
-        if(this.direction == 1) {
-            display.image(display.VillainF, this.x, this.y);
-        } else if(this.direction == 2) {
-            display.image(display.VillainB, this.x, this.y);
-        } else if(this.direction == 3) {
-            display.image(display.VillainL, this.x, this.y);
-        } else if(this.direction == 4) {
-            display.image(display.VillainR, this.x, this.y);
-        }
-    }
-
     public void addBomb(Bomb bomb) {
         this.bomb = bomb;
     }
@@ -135,5 +121,19 @@ public class Villain extends Observable implements Sprite, Observer {
     @Override
     public ArrayList<Long> getFlashPoint() {
         return flashPoint;
+    }
+
+    @Override
+    public void render() {
+        bomb.render();
+        if(this.direction == 1) {
+            display.image(display.VillainF, this.x, this.y);
+        } else if(this.direction == 2) {
+            display.image(display.VillainB, this.x, this.y);
+        } else if(this.direction == 3) {
+            display.image(display.VillainL, this.x, this.y);
+        } else if(this.direction == 4) {
+            display.image(display.VillainR, this.x, this.y);
+        }
     }
 }

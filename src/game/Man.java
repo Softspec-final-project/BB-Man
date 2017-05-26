@@ -110,21 +110,6 @@ public class Man extends Observable implements Sprite, Observer {
         }
     }
 
-    @Override
-    public void render() {
-        bomb.render();
-        if(this.direction == 1) {
-            display.image(display.ManF, this.x, this.y);
-        } else if(this.direction == 2) {
-            display.image(display.ManB, this.x, this.y);
-        } else if(this.direction == 3) {
-            display.image(display.ManL, this.x, this.y);
-        } else if(this.direction == 4) {
-            display.image(display.ManR, this.x, this.y);
-        }
-
-    }
-
     public void addBomb(Bomb bomb) {
         this.bomb = bomb;
         this.bomb.setType(0);
@@ -146,6 +131,21 @@ public class Man extends Observable implements Sprite, Observer {
     @Override
     public ArrayList<Long> getFlashPoint() {
         return flashPoint;
+    }
+
+    @Override
+    public void render() {
+        bomb.render();
+        if(this.direction == 1) {
+            display.image(display.ManF, this.x, this.y);
+        } else if(this.direction == 2) {
+            display.image(display.ManB, this.x, this.y);
+        } else if(this.direction == 3) {
+            display.image(display.ManL, this.x, this.y);
+        } else if(this.direction == 4) {
+            display.image(display.ManR, this.x, this.y);
+        }
+
     }
 
 }

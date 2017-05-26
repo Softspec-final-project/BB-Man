@@ -20,16 +20,16 @@ public class BrickBlock implements Block {
         this.display = display;
     }
 
-    @Override
-    public void render() {
-        display.image(display.BlickBlock, this.x, this.y);
-    }
-
     public int getX() {
         return x;
     }
 
     public int getY() {
         return y;
+    }
+
+    @Override
+    public void render() {
+        display.image(display.BlickBlock, this.x, this.y);
     }
 }

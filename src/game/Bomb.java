@@ -41,6 +41,33 @@ public class Bomb extends Observable implements Component , Block {
         this.timeStamp = display.millis();
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public boolean isFire() {
+        return isFire;
+    }
+
+    public void reset() {
+        this.x = -64;
+        this.y = -64;
+        this.timeStamp = 0;
+        this.isFire = false;
+        for (Fire f : fire) {
+            f.reset();
+        }
+        render();
+    }
+
     @Override
     public void render() {
         if(display.millis() - this.timeStamp < 1500) {
@@ -86,32 +113,5 @@ public class Bomb extends Observable implements Component , Block {
 
 
         }
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public boolean isFire() {
-        return isFire;
-    }
-
-    public void reset() {
-        this.x = -64;
-        this.y = -64;
-        this.timeStamp = 0;
-        this.isFire = false;
-        for (Fire f : fire) {
-            f.reset();
-        }
-        render();
     }
 }
