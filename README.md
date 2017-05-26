@@ -22,8 +22,12 @@ A game for Software Specification & Design
 * Singleton pattern
 * Observer pattern
 * Command pattern
+* Flyweight pattern
 
 ## **Principles**
+* Single responsibility principle 
+* Open/closed principle
+* Interface-segregation principle
 
 ## **Nutthapol-Part**
 * Player move
@@ -33,6 +37,7 @@ A game for Software Specification & Design
 * If fire hit the brick destroy it
 * Replay using list of command
 * Enemy and player died when fire hit them
+* Fix bugs
 
 ## **Thanut-Part**
 * Initial project
@@ -41,3 +46,4 @@ A game for Software Specification & Design
 * Seperate object
 * Start and End game
 * Find and use external library
+* Refactor code
