@@ -81,20 +81,21 @@ public class Main extends PApplet {
     @Override
     public void mousePressed() {
         super.mousePressed();
-        if(mouseX >=192 && mouseX <=435 && mouseY >=528 && mouseY <=604 ) {
-            if(!g.getReplay()){
+        if(isEnd) {
+            if (mouseX >= 192 && mouseX <= 435 && mouseY >= 528 && mouseY <= 604) {
+                if (!g.getReplay()) {
+                    isStart = true;
+                    isEnd = false;
+                    g.replay();
+                }
+            }
+            if (mouseX >= 548 && mouseX <= 791 && mouseY >= 528 && mouseY <= 604) {
                 isStart = true;
                 isEnd = false;
-                g.replay();
+                g.restart();
+                g.setGameStartTime(System.currentTimeMillis());
             }
         }
-        if(mouseX >=548 && mouseX <=791 && mouseY >=528 && mouseY <=604 ) {
-            isStart = true;
-            isEnd = false;
-            g.restart();
-            g.setGameStartTime(System.currentTimeMillis());
-        }
-
     }
 
     @Override
