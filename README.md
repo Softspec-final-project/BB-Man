@@ -1,5 +1,8 @@
 # **BB-Man**
 A game for Software Specification & Design
+```sh
+JAR-file is in /out/artifacts/BBMan_jar
+```
 
 ## **Project collaborators**
 1. [Nutthapol Sinthaveelert 5810546641](https://github.com/babestvl)
