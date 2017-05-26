@@ -26,5 +26,12 @@ A game for Software Specification & Design
 ## **Principles**
 
 ## **Nutthapol-Part**
+* Player move
+* Enemy AI
+* Plant the bomb
+* Unit can't walk through the block
+* If fire hit the brick destroy it
+* Replay using list of command
+* Enemy and player died when fire hit them
 
 ## **Thanut-Part**
