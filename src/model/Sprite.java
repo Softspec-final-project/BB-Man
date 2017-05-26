@@ -15,5 +15,6 @@ public interface Sprite extends Component {
     public Bomb getBomb();
     public ArrayList<Long> getFlashPoint();
     public ArrayList<Operation> getReplay();
+    public void clearReplay();
     public void reset();
 }

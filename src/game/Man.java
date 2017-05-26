@@ -134,6 +134,12 @@ public class Man extends Observable implements Sprite, Observer {
     }
 
     @Override
+    public void clearReplay() {
+        replay.clear();
+        flashPoint.clear();
+    }
+
+    @Override
     public void render() {
         bomb.render();
         if(this.direction == 1) {

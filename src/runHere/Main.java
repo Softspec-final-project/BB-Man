@@ -87,6 +87,7 @@ public class Main extends PApplet {
             isStart = true;
             isEnd = false;
             g.restart();
+            g.setGameStartTime(System.currentTimeMillis());
         }
 
     }
@@ -112,6 +113,7 @@ public class Main extends PApplet {
             if(event.getKeyCode() == 32) {
                 isStart = true;
                 isEnd = false;
+                g.setGameStartTime(System.currentTimeMillis());
             }
         }
 

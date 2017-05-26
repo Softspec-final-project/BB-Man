@@ -55,7 +55,6 @@ public class Game implements Observer{
         this.player.addBomb(bomb[this.bot.size()]);
         player.addObserver(this);
         this.sprites.add(player);
-        gameStartTime = System.currentTimeMillis();
     }
 
     public static Game getInstance(Main display) {
@@ -69,17 +68,18 @@ public class Game implements Observer{
         int[] step = move[o].getStep();
 
         try {
-            if (o == 0 && !s.getBomb().isFire()) {
-                move[0].execute(s);
-                s.addReplay(move[o]);
-                s.addTime(System.currentTimeMillis());
-            } else if (s.isAlive() && map.getBlockList()[(s.getY() + 64 * step[1]) / 64][(s.getX() + 64 * step[0]) / 64] == null
-                    && checkWalk(s, step)) {
-                move[o].execute(s);
-                s.addReplay(move[o]);
-                s.addTime(System.currentTimeMillis());
+            if (display.isStart) {
+                if (o == 0 && !s.getBomb().isFire()) {
+                    move[0].execute(s);
+                    s.addReplay(move[o]);
+                    s.addTime(System.currentTimeMillis());
+                } else if (s.isAlive() && map.getBlockList()[(s.getY() + 64 * step[1]) / 64][(s.getX() + 64 * step[0]) / 64] == null
+                        && checkWalk(s, step)) {
+                    move[o].execute(s);
+                    s.addReplay(move[o]);
+                    s.addTime(System.currentTimeMillis());
+                }
             }
-
         } catch (ArrayIndexOutOfBoundsException e) {
 
         }
@@ -112,18 +112,14 @@ public class Game implements Observer{
         if (!isReplay) {
             if ((int) arg == 0) {
                 // man down
-                System.out.println("Replay Start");
                 display.END_TITLE = display.LOSE;
                 display.isEnd = true;
-//                replay();
             } else {
                 numBotDied++;
                 if (numBotDied == bot.size()) {
                     // villain down
-                    System.out.println("Replay Start");
                     display.END_TITLE = display.WIN;
                     display.isEnd = true;
-//                    replay();
                 }
             }
         }
@@ -143,15 +139,19 @@ public class Game implements Observer{
     }
 
     public void restart() {
-        //TODO reset replay array
         sprites.get(3).reset();
         for(Sprite s : sprites) {
             s.reset();
+            s.clearReplay();
         }
         map.readMaze();
         for (int i = 0; i < bomb.length; i++) {
             bomb[i].reset();
         }
+    }
+
+    public void setGameStartTime(long gameStartTime) {
+        this.gameStartTime = gameStartTime;
     }
 
     public Boolean getReplay() {
@@ -173,7 +173,6 @@ public class Game implements Observer{
     public void repaint() {
         display.image(display.Floor, 0, 0);
         for (Sprite s : sprites) {
-            System.out.println(s.getClass() + " " + s.isAlive());
             if (s.isAlive()) {
                 s.render();
             }
