@@ -21,7 +21,6 @@ public class Game implements Observer{
     private long gameStartTime;
     private long replayStartTime;
     private ArrayList<Villain> bot;
-    private static Boolean isStart = false;
     private ArrayList<Sprite> sprites;
     private Random random = new Random(System.currentTimeMillis());
     private Operation[] move = {new PlantBomb(), new MoveDown(), new MoveUp(), new MoveLeft(), new MoveRight()};
